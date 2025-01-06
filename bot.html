@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração do Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-white font-roboto">
+    <div class="flex flex-col md:flex-row h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-full md:w-64 bg-gray-800 p-6 flex flex-col justify-between hidden md:block">
+            <div>
+                <h1 class="text-2xl font-bold text-red-500 text-center mb-8">Pay4Go</h1>
+                <nav>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700"><i class="fas fa-home mr-3"></i> Dashboard</a></li>
+                        <li><a href="bot.html" class="flex items-center px-4 py-2 rounded-md bg-gray-700"><i class="fas fa-robot mr-3"></i> Bots</a></li>
+                        <li><a href="usuarios.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700"><i class="fas fa-users mr-3"></i> Usuários</a></li>
+                        <li><a href="vendas.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700"><i class="fas fa-chart-line mr-3"></i> Vendas</a></li>
+                        <li><a href="assinantes.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700"><i class="fas fa-user-check mr-3"></i> Assinantes</a></li>
+                        <li><a href="remarketing.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700"><i class="fas fa-broadcast-tower mr-3"></i> Remarketing</a></li>
+                        <li><a href="notificacao.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700"><i class="fas fa-bell mr-3"></i> Notificação</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Mobile Menu Button -->
+        <button id="menu-button" class="block md:hidden bg-gray-800 text-gray-100 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 absolute top-4 left-4">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <div id="bot-config-list" class="rounded-lg bg-gray-800 p-5">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold">Bots</h1>
+                    <button onclick="showSteps()" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg">
+                        + Adicionar Bot
+                    </button>
+                </div>
+                <div class="mt-5 bg-gray-700 rounded-lg p-5 text-center">
+                    <p>Nenhum bot configurado ainda.</p>
+                </div>
+            </div>
+
+            <div id="bot-config-steps" class="hidden">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-2xl font-bold">Configuração do Bot</h1>
+                    <button onclick="hideSteps()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                        Voltar
+                    </button>
+                </div>
+
+                <!-- Steps Navigation -->
+                <div class="flex space-x-4 mb-4">
+                    <button id="step1-nav" onclick="showStep(1)" class="text-pink-600">Etapa 1</button>
+                    <button id="step2-nav" onclick="showStep(2)" class="text-gray-400">Etapa 2</button>
+                    <button id="step3-nav" onclick="showStep(3)" class="text-gray-400">Etapa 3</button>
+                    <button id="step4-nav" onclick="showStep(4)" class="text-gray-400">Etapa 4</button>
+                    <button id="step5-nav" onclick="showStep(5)" class="text-gray-400">Etapa 5</button>
+                </div>
+
+                <!-- Step 1 -->
+                <div id="step1" class="bg-gray-800 p-5 rounded-lg">
+                    <h2 class="text-xl font-bold mb-3">Grupo do Telegram</h2>
+                    <p class="text-gray-300 mb-4">
+                        1. Criar um grupo no Telegram ou escolher um grupo já criado.<br>
+                        2. Adicione o <span class="text-pink-600">@pay4goBot</span> como administrador no grupo com todas as permissões.<br>
+                        3. Copie o código ao lado e envie no grupo.<br>
+                        4. Cole o <b>ID do grupo</b> que o bot enviou no campo abaixo.
+                    </p>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <input id="group-code" type="text" value="8RYLT" readonly class="bg-gray-700 text-pink-600 font-bold p-3 rounded-lg w-32 text-center">
+                        <button onclick="copyGroupCode()" class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded-lg">
+                            Copiar
+                        </button>
+                    </div>
+                    <input id="group-id" type="text" placeholder="Cole o ID do grupo" class="bg-gray-700 text-white p-3 rounded-lg w-full">
+                    <button onclick="showStep(2)" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg mt-4">
+                        Próximo
+                    </button>
+                </div>
+
+                <!-- Step 2 -->
+                <div id="step2" class="hidden bg-gray-800 p-5 rounded-lg">
+                    <h2 class="text-xl font-bold mb-3">Configurações</h2>
+                    <p class="text-gray-300 mb-4">
+                        1. Crie um BOT pelo BotFather no Telegram e copie o token.<br>
+                        2. Configure as permissões necessárias.
+                    </p>
+                    <div class="mb-4">
+                        <label class="block text-gray-400">Categoria</label>
+                        <input id="category" type="text" placeholder="Categoria do bot" class="bg-gray-700 text-white p-3 rounded-lg w-full">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-400">Token do Bot</label>
+                        <input id="token" type="text" placeholder="Token do bot" class="bg-gray-700 text-white p-3 rounded-lg w-full">
+                    </div>
+                    <div class="flex justify-between">
+                        <button onclick="showStep(1)" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                            Voltar
+                        </button>
+                        <button onclick="showStep(3)" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg">
+                            Próximo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div id="step3" class="hidden bg-gray-800 p-5 rounded-lg">
+                    <h2 class="text-xl font-bold mb-3">Personalização</h2>
+                    <p class="text-gray-300 mb-4">
+                        1. Defina o nome e a descrição do seu bot.<br>
+                        2. Adicione uma imagem ou vídeo de boas-vindas.<br>
+                        3. Configure o botão de CTA.
+                    </p>
+                    <div class="mb-4">
+                        <label class="block text-gray-400">Nome</label>
+                        <input id="welcome-name" type="text" placeholder="Nome do bot" class="bg-gray-700 text-white p-3 rounded-lg w-full">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-400">Descrição</label>
+                        <textarea id="welcome-description" placeholder="Descrição do bot" class="bg-gray-700 text-white p-3 rounded-lg w-full"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-400">Mensagem de Boas-vindas</label>
+                        <textarea id="welcome-msg" placeholder="Mensagem de boas-vindas" class="bg-gray-700 text-white p-3 rounded-lg w-full"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-400">Imagem/Vídeo de Boas-vindas</label>
+                        <input id="welcome-media" type="file" class="bg-gray-700 text-white p-3 rounded-lg w-full">
+                    </div>
+                    <div class="flex justify-between">
+                        <button onclick="showStep(2)" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                            Voltar
+                        </button>
+                        <button onclick="showStep(4)" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg">
+                            Próximo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div id="step4" class="hidden bg-gray-800 p-5 rounded-lg">
+                    <h2 class="text-xl font-bold mb-3">Pagamentos</h2>
+                    <p class="text-gray-300 mb-4">
+                        Utilize os campos abaixo para configurar os planos e preços do bot.
+                    </p>
+                    <div id="plans-list" class="space-y-4"></div>
+                    <button onclick="addPlan()" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                        + Adicionar Plano
+                    </button>
+                    <div class="flex justify-between mt-4">
+                        <button onclick="showStep(3)" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                            Voltar
+                        </button>
+                        <button onclick="showStep(5)" class="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg">
+                            Próximo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div id="step5" class="hidden bg-gray-800 p-5 rounded-lg">
+                    <h2 class="text-xl font-bold mb-3">Finalizar</h2>
+                    <p class="text-gray-300 mb-4">
+                        Confirme as configurações e clique em "Criar Bot" para finalizar.
+                    </p>
+                    <div class="flex justify-between">
+                        <button onclick="showStep(4)" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                            Voltar
+                        </button>
+                        <button onclick="saveBotConfig()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                            Criar Bot
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const botConfig = {};
+
+        // Function to toggle the sidebar for mobile
+        const menuButton = document.getElementById('menu-button');
+        const sidebar = document.getElementById('sidebar');
+
+        menuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+
+        function showSteps() {
+            document.getElementById('bot-config-list').classList.add('hidden');
+            document.getElementById('bot-config-steps').classList.remove('hidden');
+            showStep(1);
+        }
+
+        function hideSteps() {
+            document.getElementById('bot-config-list').classList.remove('hidden');
+            document.getElementById('bot-config-steps').classList.add('hidden');
+        }
+
+        function showStep(step) {
+            const steps = [1, 2, 3, 4, 5];
+            steps.forEach(s => {
+                document.getElementById(`step${s}`).classList.add('hidden');
+                document.getElementById(`step${s}-nav`).classList.remove('text-pink-600');
+                document.getElementById(`step${s}-nav`).classList.add('text-gray-400');
+            });
+            document.getElementById(`step${step}`).classList.remove('hidden');
+            document.getElementById(`step${step}-nav`).classList.add('text-pink-600');
+            document.getElementById(`step${step}-nav`).classList.remove('text-gray-400');
+        }
+
+        function copyGroupCode() {
+            const groupCode = document.getElementById('group-code').value;
+            navigator.clipboard.writeText(groupCode).then(() => {
+                alert('Código copiado para a área de transferência!');
+            });
+        }
+
+        function addPlan() {
+            const plansList = document.getElementById('plans-list');
+            const planCount = plansList.children.length;
+
+            if (planCount >= 5) {
+                alert('Você só pode adicionar até 5 planos.');
+                return;
+            }
+
+            const newPlan = document.createElement('div');
+            newPlan.classList.add('flex', 'items-center', 'space-x-3', 'bg-gray-700', 'p-3', 'rounded-lg', 'mb-2');
+            newPlan.innerHTML = `
+                <input type="text" placeholder="Nome do Plano" class="bg-gray-800 text-white p-2 rounded-lg w-1/4">
+                <input type="number" placeholder="Duração (dias)" class="bg-gray-800 text-white p-2 rounded-lg w-1/4">
+                <input type="number" placeholder="Preço" class="bg-gray-800 text-white p-2 rounded-lg w-1/4">
+                <button onclick="this.parentElement.remove()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+                    Remover
+                </button>
+            `;
+            plansList.appendChild(newPlan);
+        }
+
+        function saveBotConfig() {
+            botConfig.groupId = document.getElementById('group-id').value;
+            botConfig.category = document.getElementById('category').value;
+            botConfig.token = document.getElementById('token').value;
+            botConfig.welcomeMsg = document.getElementById('welcome-msg').value;
+
+            console.log(botConfig);
+            alert('Bot configurado com sucesso!');
+            hideSteps();
+        }
+    </script>
+</body>
+</html>

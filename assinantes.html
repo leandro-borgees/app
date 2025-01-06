@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay4Go - Assinantes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configuração do flatpickr para intervalo de datas
+            flatpickr("#date-range", {
+                mode: "range",
+                dateFormat: "d/m/Y",
+                locale: {
+                    firstDayOfWeek: 0, // Domingo
+                },
+                onChange: function(selectedDates, dateStr, instance) {
+                    console.log("Datas selecionadas:", dateStr);
+                }
+            });
+
+            // Toggle menu para dispositivos menores
+            const menuButton = document.getElementById('menu-button');
+            const sidebar = document.getElementById('sidebar');
+
+            menuButton.addEventListener('click', () => {
+                sidebar.classList.toggle('hidden');
+            });
+        });
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-roboto">
+    <div class="flex flex-col md:flex-row h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-full md:w-64 bg-gray-800 p-6 flex flex-col justify-between hidden md:block">
+            <div>
+                <h1 class="text-2xl font-bold text-red-500 text-center mb-8">Pay4Go</h1>
+                <nav>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="index.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-home mr-3"></i> Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="bot.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-robot mr-3"></i> Bots
+                            </a>
+                        </li>
+                        <li>
+                            <a href="usuarios.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-users mr-3"></i> Usuários
+                            </a>
+                        </li>
+                        <li>
+                            <a href="vendas.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-chart-line mr-3"></i> Vendas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="assinantes.html" class="flex items-center px-4 py-2 rounded-md bg-gray-700">
+                                <i class="fas fa-user-check mr-3"></i> Assinantes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="remarketing.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-broadcast-tower mr-3"></i> Remarketing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="notificacao.html" class="flex items-center px-4 py-2 rounded-md hover:bg-gray-700">
+                                <i class="fas fa-bell mr-3"></i> Notificação
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Menu Button for Mobile -->
+        <button id="menu-button" class="block md:hidden bg-gray-800 text-gray-100 p-4 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 absolute top-4 left-4 md:mr-4">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <!-- Header -->
+            <header class="flex flex-col md:flex-row items-center justify-between mb-6 space-y-4 md:space-y-0 md:space-x-4">
+                <h2 class="text-2xl font-bold mb-4 md:mb-0">Assinantes</h2>
+                <div class="relative w-full md:w-auto">
+                    <label for="date-range" class="sr-only">Selecionar intervalo de datas</label>
+                    <div class="flex items-center bg-gray-800 text-gray-100 px-4 py-3 rounded-lg border border-gray-700 shadow-md hover:shadow-lg focus-within:ring-2 focus-within:ring-red-500 cursor-pointer">
+                        <i class="fas fa-calendar-alt mr-3 text-gray-400 text-lg"></i>
+                        <input id="date-range" type="text" placeholder="Selecione o intervalo de datas"
+                            class="bg-transparent text-gray-100 placeholder-gray-400 focus:outline-none w-full text-sm">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Search Bar -->
+            <div class="mb-4 relative">
+                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                <input type="text" placeholder="Filtrar por username, plano, valor ou status" class="w-full pl-10 pr-4 py-2 bg-gray-800 text-gray-100 rounded-md border border-gray-700 focus:ring-2 focus:ring-red-500 hover:ring-2 hover:ring-gray-600 transition">
+            </div>
+
+            <!-- Table Section -->
+            <section class="overflow-x-auto">
+                <table class="w-full bg-gray-800 rounded-lg overflow-hidden table-auto">
+                    <thead class="bg-gray-700 text-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 text-left">ID Telegram</th>
+                            <th class="px-4 py-2 text-left">Plano</th>
+                            <th class="px-4 py-2 text-left">Valor</th>
+                            <th class="px-4 py-2 text-left">Status</th>
+                            <th class="px-4 py-2 text-left">Entrou</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center py-6 text-gray-400">
+                                Nenhum assinante encontrado.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Pagination -->
+                <div class="mt-4 flex justify-center space-x-4">
+                    <button aria-label="Página anterior" class="px-4 py-2 bg-red-500 text-gray-100 rounded-md hover:bg-red-600">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button aria-label="Próxima página" class="px-4 py-2 bg-red-500 text-gray-100 rounded-md hover:bg-red-600">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
